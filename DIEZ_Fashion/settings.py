@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-2ka(4_qafxtqq9&_&+i4cdh@ixsjx_anzq_n2t9@oy3()de4(c
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+# CSRF_TRUSTED_ORIGINS = ['https://creat-stream.onrender.com','https://*.127.0.0.1']
 
 # Application definition
 
@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     # 'snippets',
+    'rest_framework',
+    'corsheaders',
     'rest_framework.authtoken',
     'django_filters',
     'category',
@@ -59,9 +60,38 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'DIEZ_Fashion.urls'
+CORS_ORIGIN_ALLOW_ALL = True
+CSRF_TRUSTED_ORIGINS = ['https://final-project-api-hvbn.onrender.com']
+
+CORS_ALLOWED_ORIGINS = [
+    'https://final-project-api-hvbn.onrender.com',
+    'https://final-project-api-hvbn.onrender.com',
+]
+
+# Allow cookies to be included in cross-origin requests
+CORS_ALLOW_CREDENTIALS = True
+
+# Specify allowed HTTP methods
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+# Specify allowed HTTP headers
+CORS_ALLOW_HEADERS = [
+    'Accept',
+    'Authorization',
+    'Content-Type',
+]
+
 
 TEMPLATES = [
     {
@@ -144,15 +174,3 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = env("EMAIL")
 EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
-
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
