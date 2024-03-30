@@ -14,6 +14,8 @@ from pathlib import Path
 import environ
 env = environ.Env()
 environ.Env.read_env()
+from django.conf import settings
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -96,7 +98,8 @@ CORS_ALLOW_HEADERS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates',],
+        # 'DIRS': ['templates',],
+        'DIRS': [os.path.join(BASE_DIR, 'customers', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
