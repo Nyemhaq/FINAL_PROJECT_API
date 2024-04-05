@@ -74,9 +74,19 @@ class UserLoginApiView(APIView):
                 return Response({'error' : "Invalid Credential"})
         return Response(serializer.errors)
 
+# class UserLogoutView(APIView):
+#     def get(self, request):
+#         request.user.auth_token.delete()
+#         logout(request)
+#         return redirect('login')
+
 class UserLogoutView(APIView):
     def get(self, request):
-        request.user.auth_token.delete()
+        if request.user.is_authenticated:
+            try:
+                request.user.auth_token.delete()
+            except Token.DoesNotExist:
+                pass  
         logout(request)
         return redirect('login')
         
